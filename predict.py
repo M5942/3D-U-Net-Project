@@ -108,15 +108,42 @@ def save_as_nifti(image: np.ndarray, path: str):
     nib.save(nifti_image, path)
 
 
-if __name__ == '__main__':
+def get_IoU(gt, pred):
+    """
+    Calculates the Intersection over Union (IoU) of the predicted mask and the ground truth mask
+    Parameters
+    ----------
+    gt : np.ndarray
+        Ground truth mask
+    pred : np.ndarray
+        Predicted mask
 
-    model_path = r"C:\Users\Matias\Documents\NYU Assignments\2022\Fall Semester\Computational " \
-                 r"Physics\Project\checkpoint\test_cp.ckpt"
-    image_path = r"C:\Users\Matias\Documents\NYU Assignments\2022\Fall Semester\Computational " \
-                 r"Physics\Project\mouse-brain-atlas-1.0\dancebean-mouse-brain-atlas-805f5c3\Tc1_Cerebellum\v1" \
-                 r"\template\tc1_276242-ob_c.nii.gz"
+    Returns
+    -------
+    float
+        Intersection over Union
+    """
+
+    from tensorflow.keras.metrics import BinaryIoU
+
+    iou = BinaryIoU()
+
+    iou_val = iou(gt, pred).numpy()
+
+    # Return the IoU
+    return iou_val
+
+
+if __name__ == '__main__':
+    import os
+
+    model_path = r"models\cerebellum_model.h5"
+    image_path = r"data\cerebellum_data\image\tc1_276388-ob_c.nii.gz"
 
     # Predict the mask
     mask = predict_from_filepath(model_path, image_path)
 
+    prediction_path = os.path.basename(image_path).split(".")[0] + "_prediction.nii"
 
+    # Save the mask
+    save_as_nifti(mask, prediction_path)

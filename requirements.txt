@@ -1,0 +1,9 @@
+ipython==8.4.0
+ipywidgets==7.6.5
+matplotlib==3.5.2
+nibabel==4.0.2
+numpy==1.22.3
+patchify==0.2.3
+scikit_learn==1.1.1
+scikit_image==0.19.2
+tensorflow==2.10.0

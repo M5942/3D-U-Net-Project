@@ -55,7 +55,8 @@ def get_data(data_dir: str, patch_size: tuple = (64, 64, 64), test_size: float =
 
     # Shuffle the patches in unison
     def unison_shuffled_copies(a, b):
-        assert len(a) == len(b)
+        if len(a) != len(b):
+            raise AssertionError
         # Keeps the shuffling consistent to get reproducible results
         p = np.random.RandomState(SEED).permutation(len(a))
         return a[p], b[p]

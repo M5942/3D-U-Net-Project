@@ -1,7 +1,7 @@
 from typing import Union
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Conv3D, MaxPooling3D, UpSampling3D, concatenate, BatchNormalization, \
-    Activation, Dropout
+    Activation
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras import regularizers
 from .loss import dice_loss, dice_coef

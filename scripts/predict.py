@@ -2,7 +2,6 @@ import numpy as np
 import nibabel as nib
 from patchify import unpatchify
 from tensorflow.keras.models import load_model
-import tensorflow as tf
 from .preprocess import load_nifti, preprocess_image, resize_image, get_patches
 
 
